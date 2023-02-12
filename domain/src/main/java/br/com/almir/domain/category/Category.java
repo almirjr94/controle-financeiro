@@ -12,7 +12,6 @@ public class Category extends AggregateRoot<CategoryID> {
   private Instant createdAt;
   private Instant updatedAt;
 
-
   private Category(final CategoryID id,
       final String name,
       final Instant createdAt,
@@ -24,9 +23,17 @@ public class Category extends AggregateRoot<CategoryID> {
     this.updatedAt = updatedAt;
   }
 
-  public static Category newCategory(final Long id, final String name) {
+  public static Category newCategory(final String name) {
     final var now = Instant.now();
-    return new Category(CategoryID.from(id), name, now, now);
+    return new Category(null, name, now, now);
+  }
+
+  public Category with(final CategoryID categoryID) {
+    if (this.getId() == null) {
+      super.id = categoryID;
+    }
+
+    return this;
   }
 
   public Category update(

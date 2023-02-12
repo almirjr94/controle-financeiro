@@ -8,15 +8,15 @@ import java.util.Optional;
 
 public interface CategoryGateway {
 
-  Category create(Category aCategory);
+  Category create(Category category);
 
-  void deleteById(CategoryID anId);
+  void deleteById(CategoryID id);
 
-  Optional<Category> findById(CategoryID anId);
+  Optional<Category> findById(CategoryID id);
 
-  Category update(Category aCategory);
+  Category update(Category category);
 
-  Pagination<Category> findAll(SearchQuery aQuery);
+  Pagination<Category> findAll(SearchQuery query);
 
   List<CategoryID> existsByIds(Iterable<CategoryID> ids);
 }

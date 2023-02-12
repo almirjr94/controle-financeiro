@@ -1,6 +1,6 @@
 package br.com.almir.domain;
 
-public abstract class Identifier extends ValueObject {
+public abstract class Identifier {
 
   public abstract Long getValue();
 }

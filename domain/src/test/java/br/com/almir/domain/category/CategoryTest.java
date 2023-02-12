@@ -7,8 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import br.com.almir.domain.exceptions.DomainException;
 import br.com.almir.domain.validation.handler.ThrowsValidationHandler;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
 
@@ -16,13 +14,11 @@ class CategoryTest {
 
   @Test
   void givenAValidParams_whenCallNewCategory_thenInstantiateACategory() {
-    final var expectedId = 1L;
     final var expectednName = "Test Category";
 
-    final var category = Category.newCategory(expectedId, expectednName);
+    final var category = Category.newCategory(expectednName);
 
     assertNotNull(category);
-    assertEquals(CategoryID.from(expectedId), category.getId());
     assertEquals(expectednName, category.getName());
     assertNotNull(category.getCreatedAt());
     assertNotNull(category.getUpdatedAt());
@@ -36,7 +32,7 @@ class CategoryTest {
     final var expectedErrorMessage = "'name' should not be null";
 
     final var actualCategory =
-        Category.newCategory(1L, expectedName);
+        Category.newCategory(expectedName);
 
     final var actualException =
         assertThrows(DomainException.class,
@@ -47,32 +43,6 @@ class CategoryTest {
   }
 
   @Test
-  void givenANegativeId_whenCallNewCategory_thenShouldReceiveError() {
-    final var expectedId = -1L;
-    final var expectedName = "Loja";
-    final var expectedErrorMessage = "Category 'id' should be positive";
-
-    final var actualException =
-        assertThrows(IllegalArgumentException.class,
-            () -> Category.newCategory(expectedId, expectedName));
-
-    assertEquals(expectedErrorMessage, actualException.getMessage());
-  }
-
-  @Test
-  void givenAZeroId_whenCallNewCategory_thenShouldReceiveError() {
-    final var expectedId = 0L;
-    final var expectedName = "Loja";
-    final var expectedErrorMessage = "Category 'id' should be positive";
-
-    final var actualException =
-        assertThrows(IllegalArgumentException.class,
-            () -> Category.newCategory(expectedId, expectedName));
-
-    assertEquals(expectedErrorMessage, actualException.getMessage());
-  }
-
-  @Test
   void givenAnInvalidEmptyName_whenCallNewCategoryAndValidate_thenShouldReceiveError() {
     final var expectedId = 1L;
     final var expectedName = "  ";
@@ -80,7 +50,7 @@ class CategoryTest {
     final var expectedErrorMessage = "'name' should not be empty";
 
     final var actualCategory =
-        Category.newCategory(expectedId, expectedName);
+        Category.newCategory(expectedName);
 
     final var actualException =
         assertThrows(DomainException.class,
@@ -95,7 +65,7 @@ class CategoryTest {
     final var expectedName = "Teste2";
 
     final var actualCategory =
-        Category.newCategory(2L, "Teste");
+        Category.newCategory("Teste");
 
     final var actualCreatedAt = actualCategory.getCreatedAt();
     final var actualUpdatedAt = actualCategory.getUpdatedAt();
@@ -108,15 +78,5 @@ class CategoryTest {
     assertTrue(actualUpdatedAt.isBefore(actualCategory.getUpdatedAt()));
   }
 
-  @Test
-  void testez(){
-    final var actualCategory =
-        Category.newCategory(2L, "Testee");
-    final var actualCategory1 =
-        Category.newCategory(2L, "Teste");
 
-    Set<Category> actualCategory11 = new HashSet<>();
-    actualCategory11.add(actualCategory1);
-    actualCategory11.add(actualCategory);
-  }
 }

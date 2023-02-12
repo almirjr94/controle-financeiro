@@ -7,17 +7,17 @@ public class DomainException extends NoStacktraceException {
 
   protected final List<Error> errors;
 
-  protected DomainException(final String aMessage, final List<Error> anErrors) {
+  protected DomainException(final String aMessage, final List<Error> errors) {
     super(aMessage);
-    this.errors = anErrors;
+    this.errors = errors;
   }
 
-  public static DomainException with(final Error anErrors) {
-    return new DomainException(anErrors.message(), List.of(anErrors));
+  public static DomainException with(final Error error) {
+    return new DomainException(error.message(), List.of(error));
   }
 
-  public static DomainException with(final List<Error> anErrors) {
-    return new DomainException("", anErrors);
+  public static DomainException with(final List<Error> errors) {
+    return new DomainException("", errors);
   }
 
   public List<Error> getErrors() {

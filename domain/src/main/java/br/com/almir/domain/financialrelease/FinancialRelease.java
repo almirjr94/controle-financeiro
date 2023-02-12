@@ -16,11 +16,8 @@ public class FinancialRelease extends AggregateRoot<FinancialReleaseID> {
   private String description;
   private LocalDate releasedAt;
 
-  private boolean active;
   private Instant createdAt;
   private Instant updatedAt;
-  private Instant deletedAt;
-
 
   private FinancialRelease(
       final FinancialReleaseID financialReleaseID,
@@ -28,25 +25,20 @@ public class FinancialRelease extends AggregateRoot<FinancialReleaseID> {
       final SubcategoryID subcategoryID,
       final String describe,
       final LocalDate releasedAt,
-      final boolean active,
       final Instant createdAt,
-      final Instant updatedAt,
-      final Instant deletedAt) {
+      final Instant updatedAt) {
 
     super(financialReleaseID);
     this.money = money;
     this.subcategoryID = subcategoryID;
     this.description = describe;
     this.releasedAt = releasedAt;
-    this.active = active;
     this.createdAt = createdAt;
     this.updatedAt = updatedAt;
-    this.deletedAt = deletedAt;
     selfValidate();
   }
 
   public static FinancialRelease newFinancialRelease(
-      final FinancialReleaseID financialReleaseID,
       final MonetaryAmount money,
       final SubcategoryID subcategoryID,
       final String describe,
@@ -55,38 +47,23 @@ public class FinancialRelease extends AggregateRoot<FinancialReleaseID> {
     final var now = Instant.now();
     final var release = releasedAt == null ? LocalDate.from(now) : releasedAt;
 
-    return new FinancialRelease(financialReleaseID,
-        money, subcategoryID, describe, release, true, now, now, null);
+    return new FinancialRelease(null,
+        money, subcategoryID, describe, release, now, now);
   }
 
-  public FinancialRelease activate() {
-    this.deletedAt = null;
-    this.active = true;
-    this.updatedAt = Instant.now();
-    return this;
-  }
-
-  public FinancialRelease deactivate() {
-    if (getDeletedAt() == null) {
-      this.deletedAt = Instant.now();
+  public FinancialRelease with(final FinancialReleaseID financialReleaseID) {
+    if (this.getId() == null) {
+      super.id = financialReleaseID;
     }
-
-    this.active = false;
-    this.updatedAt = Instant.now();
     return this;
   }
+
+
 
   public FinancialRelease update(
       final MonetaryAmount money,
       final String description,
-      final LocalDate releasedAt,
-      final boolean isActive) {
-
-    if (isActive) {
-      activate();
-    } else {
-      deactivate();
-    }
+      final LocalDate releasedAt) {
 
     this.money = money;
     this.description = description;
@@ -129,14 +106,6 @@ public class FinancialRelease extends AggregateRoot<FinancialReleaseID> {
 
   public Instant getUpdatedAt() {
     return updatedAt;
-  }
-
-  public boolean isActive() {
-    return active;
-  }
-
-  public Instant getDeletedAt() {
-    return deletedAt;
   }
 
   @Override

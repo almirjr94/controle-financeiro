@@ -34,12 +34,18 @@ public class Subcategory extends AggregateRoot<SubcategoryID> {
   }
 
   public static Subcategory newSubcatergory(
-      final SubcategoryID subcategoryId,
       final String name,
       final CategoryID category
   ) {
     var now = Instant.now();
-    return new Subcategory(subcategoryId, name, category, new ArrayList<>(), now, now);
+    return new Subcategory(null, name, category, new ArrayList<>(), now, now);
+  }
+
+  public Subcategory with(final SubcategoryID subcategoryID) {
+    if (this.getId() == null) {
+      super.id = subcategoryID;
+    }
+    return this;
   }
 
   public Subcategory update(

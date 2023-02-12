@@ -4,21 +4,20 @@ package br.com.almir.domain.financialrelease;
 import br.com.almir.domain.pagination.Pagination;
 import br.com.almir.domain.pagination.SearchQuery;
 import br.com.almir.domain.subcategory.Subcategory;
-import br.com.almir.domain.subcategory.SubcategoryID;
 import java.util.List;
 import java.util.Optional;
 
 public interface FinancialReleaseGateway {
 
-  FinancialRelease create(Subcategory aCategory);
+  FinancialRelease create(FinancialRelease subcategory);
 
-  void deleteById(FinancialReleaseID anId);
+  void deleteById(FinancialReleaseID id);
 
-  Optional<FinancialRelease> findById(FinancialReleaseID anId);
+  Optional<FinancialRelease> findById(FinancialReleaseID id);
 
-  Subcategory update(FinancialRelease aCategory);
+  FinancialRelease update(FinancialRelease financialRelease);
 
-  Pagination<FinancialRelease> findAll(SearchQuery aQuery);
+  Pagination<FinancialRelease> findAll(SearchQuery query);
 
   List<FinancialReleaseID> existsByIds(Iterable<FinancialReleaseID> ids);
 }

@@ -5,7 +5,7 @@ import br.com.almir.domain.validation.handler.Notification;
 
 public class NotificationException extends DomainException {
 
-  public NotificationException(final String aMessage, final Notification notification) {
-    super(aMessage, notification.getErrors());
+  public NotificationException(final String message, final Notification notification) {
+    super(message, notification.getErrors());
   }
 }

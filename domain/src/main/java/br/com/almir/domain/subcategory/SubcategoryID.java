@@ -16,8 +16,8 @@ public class SubcategoryID extends Identifier {
     this.value = value;
   }
 
-  public static SubcategoryID from(final Long anId) {
-    return new SubcategoryID(anId);
+  public static SubcategoryID from(final Long id) {
+    return new SubcategoryID(id);
   }
 
 

@@ -8,15 +8,15 @@ import java.util.Optional;
 
 public interface SubcategoryGateway {
 
-  Subcategory create(Subcategory aCategory);
+  Subcategory create(Subcategory subcategory);
 
-  void deleteById(SubcategoryID anId);
+  void deleteById(SubcategoryID id);
 
-  Optional<Subcategory> findById(SubcategoryID anId);
+  Optional<Subcategory> findById(SubcategoryID id);
 
-  Subcategory update(Subcategory aCategory);
+  Subcategory update(Subcategory subcategory);
 
-  Pagination<Subcategory> findAll(SearchQuery aQuery);
+  Pagination<Subcategory> findAll(SearchQuery query);
 
   List<SubcategoryID> existsByIds(Iterable<SubcategoryID> ids);
 }

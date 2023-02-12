@@ -22,8 +22,8 @@ class SubcategoryTest {
     final var expectednName = "Test Category";
     final var expectedCategoryId = CategoryID.from(2L);
 
-    final var subcategory = Subcategory.newSubcatergory(expectedId, expectednName,
-        expectedCategoryId);
+    final var subcategory = Subcategory.newSubcatergory(expectednName,
+        expectedCategoryId).with(expectedId);
 
     assertNotNull(subcategory);
     assertEquals(expectedId, subcategory.getId());
@@ -42,7 +42,7 @@ class SubcategoryTest {
     final var expectedErrorCount = 1;
     final var expectedErrorMessage = "'name' should not be null";
 
-    final var actualSubcategory = Subcategory.newSubcatergory(expectedId, expectednName,
+    final var actualSubcategory = Subcategory.newSubcatergory(expectednName,
         expectedCategoryId);
 
     final var actualException =
@@ -62,7 +62,7 @@ class SubcategoryTest {
     final var expectedErrorCount = 1;
     final var expectedErrorMessage = "'name' should not be empty";
 
-    final var actualSubcategory = Subcategory.newSubcatergory(expectedId, expectednName,
+    final var actualSubcategory = Subcategory.newSubcatergory(expectednName,
         expectedCategoryId);
 
     final var actualException =
@@ -82,7 +82,7 @@ class SubcategoryTest {
 
     final var expectedName = "Text Novo";
 
-    final var actualSubcategory = Subcategory.newSubcatergory(id, name, categoryId);
+    final var actualSubcategory = Subcategory.newSubcatergory(name, categoryId);
 
     final var actualCreatedAt = actualSubcategory.getCreatedAt();
     final var actualUpdatedAt = actualSubcategory.getUpdatedAt();
@@ -105,7 +105,7 @@ class SubcategoryTest {
     final var expectedFinancialReleases = List.of(FinancialReleaseID.from(1L),
         FinancialReleaseID.from(2L));
 
-    final var actualSubcategory = Subcategory.newSubcatergory(expectedId, expectedName,
+    final var actualSubcategory = Subcategory.newSubcatergory(expectedName,
         expectedCategoryId);
 
     final var actualCreatedAt = actualSubcategory.getCreatedAt();
@@ -129,7 +129,7 @@ class SubcategoryTest {
     final var expectedCategoryId = CategoryID.from(2L);
     final FinancialReleaseID expectedFinancialReleases = null;
 
-    final var actualSubcategory = Subcategory.newSubcatergory(expectedId, expectedName,
+    final var actualSubcategory = Subcategory.newSubcatergory(expectedName,
         expectedCategoryId);
 
     final var actualCreatedAt = actualSubcategory.getCreatedAt();
@@ -154,7 +154,7 @@ class SubcategoryTest {
     final var expectedFinancialReleases = List.of(FinancialReleaseID.from(1L),
         FinancialReleaseID.from(2L));
 
-    final var actualSubcategory = Subcategory.newSubcatergory(expectedId, expectedName,
+    final var actualSubcategory = Subcategory.newSubcatergory(expectedName,
         expectedCategoryId);
 
     final var actualCreatedAt = actualSubcategory.getCreatedAt();
@@ -177,7 +177,7 @@ class SubcategoryTest {
     final var expectedCategoryId = CategoryID.from(2L);
     final List<FinancialReleaseID> expectedFinancialReleases = null;
 
-    final var actualSubcategory = Subcategory.newSubcatergory(expectedId, expectedName,
+    final var actualSubcategory = Subcategory.newSubcatergory(expectedName,
         expectedCategoryId);
 
     final var actualCreatedAt = actualSubcategory.getCreatedAt();

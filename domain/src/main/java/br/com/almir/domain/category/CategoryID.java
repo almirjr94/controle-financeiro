@@ -16,8 +16,8 @@ public class CategoryID extends Identifier {
     this.value = value;
   }
 
-  public static CategoryID from(final Long anId) {
-    return new CategoryID(anId);
+  public static CategoryID from(final Long id) {
+    return new CategoryID(id);
   }
 
 
