@@ -6,4 +6,5 @@ import br.com.almir.domain.pagination.SearchQuery;
 
 public abstract class ListFinancialReleaseUseCase extends
     UseCase<SearchQuery, Pagination<FinancialReleaseListOutput>> {
+
 }

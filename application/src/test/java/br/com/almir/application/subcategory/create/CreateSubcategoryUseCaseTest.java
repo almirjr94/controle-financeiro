@@ -6,7 +6,6 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.when;
 
 import br.com.almir.application.UseCaseTest;
-import br.com.almir.application.category.create.CreateCategoryCommand;
 import br.com.almir.application.category.retrieve.get.GetCategoryByIdUseCase;
 import br.com.almir.domain.category.Category;
 import br.com.almir.domain.category.CategoryID;
@@ -73,7 +72,7 @@ class CreateSubcategoryUseCaseTest extends UseCaseTest {
     final var expectedErrorCount = 1;
 
     final var command =
-        CreateSubcategoryCommand.with(expectedName,expectedCategoryID);
+        CreateSubcategoryCommand.with(expectedName, expectedCategoryID);
 
     DomainException actualException = Assertions.assertThrows(DomainException.class,
         () -> useCase.execute(command));
@@ -95,7 +94,7 @@ class CreateSubcategoryUseCaseTest extends UseCaseTest {
         thenThrow(NotFoundException.with(Category.class, categoryID));
 
     final var command =
-        CreateSubcategoryCommand.with(expectedName,categoryID);
+        CreateSubcategoryCommand.with(expectedName, categoryID);
 
     NotFoundException actualException = Assertions.assertThrows(NotFoundException.class,
         () -> useCase.execute(command));

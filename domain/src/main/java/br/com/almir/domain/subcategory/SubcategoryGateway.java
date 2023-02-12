@@ -1,6 +1,7 @@
 package br.com.almir.domain.subcategory;
 
 
+import br.com.almir.domain.category.CategoryID;
 import br.com.almir.domain.pagination.Pagination;
 import br.com.almir.domain.pagination.SearchQuery;
 import java.util.List;
@@ -18,5 +19,5 @@ public interface SubcategoryGateway {
 
   Pagination<Subcategory> findAll(SearchQuery query);
 
-  List<SubcategoryID> existsByIds(Iterable<SubcategoryID> ids);
+  List<SubcategoryID> findByCategoryId(CategoryID categoryId);
 }

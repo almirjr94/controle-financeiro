@@ -59,7 +59,6 @@ public class FinancialRelease extends AggregateRoot<FinancialReleaseID> {
   }
 
 
-
   public FinancialRelease update(
       final MonetaryAmount money,
       final String description,

@@ -6,5 +6,6 @@ import br.com.almir.domain.pagination.Pagination;
 import br.com.almir.domain.pagination.SearchQuery;
 
 public abstract class ListCategoriesUseCase
-        extends UseCase<SearchQuery, Pagination<CategoryListOutput>> {
+    extends UseCase<SearchQuery, Pagination<CategoryListOutput>> {
+
 }

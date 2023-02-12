@@ -4,8 +4,6 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 
 import br.com.almir.application.UseCaseTest;
-import br.com.almir.application.category.retrieve.list.CategoryListOutput;
-import br.com.almir.domain.category.Category;
 import br.com.almir.domain.category.CategoryID;
 import br.com.almir.domain.pagination.Pagination;
 import br.com.almir.domain.pagination.SearchQuery;

@@ -3,7 +3,7 @@ package br.com.almir.domain.financialrelease;
 
 import br.com.almir.domain.pagination.Pagination;
 import br.com.almir.domain.pagination.SearchQuery;
-import br.com.almir.domain.subcategory.Subcategory;
+import br.com.almir.domain.subcategory.SubcategoryID;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,5 +19,5 @@ public interface FinancialReleaseGateway {
 
   Pagination<FinancialRelease> findAll(SearchQuery query);
 
-  List<FinancialReleaseID> existsByIds(Iterable<FinancialReleaseID> ids);
+  List<FinancialReleaseID> findBySubCategoryIds(Iterable<SubcategoryID> subcategoryIDs);
 }

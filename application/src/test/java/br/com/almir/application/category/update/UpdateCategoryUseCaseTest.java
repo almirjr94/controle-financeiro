@@ -42,7 +42,7 @@ class UpdateCategoryUseCaseTest extends UseCaseTest {
     final var expectedName = "Teste";
     final var expectedId = category.getId();
 
-    final var aCommand = UpdateCategoryCommand.with(
+    final var command = UpdateCategoryCommand.with(
         expectedId.getValue(),
         expectedName
     );
@@ -53,7 +53,7 @@ class UpdateCategoryUseCaseTest extends UseCaseTest {
     when(categoryGateway.update(any()))
         .thenReturn(Category.newCategory("Teste").with(CategoryID.from(2L)));
 
-    final var actualOutput = useCase.execute(aCommand);
+    final var actualOutput = useCase.execute(command);
 
     Assertions.assertNotNull(actualOutput);
     Assertions.assertNotNull(actualOutput.id());

@@ -6,6 +6,9 @@ import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.times;
 
 import br.com.almir.application.UseCaseTest;
+import br.com.almir.domain.exceptions.DomainException;
+import br.com.almir.domain.financialrelease.FinancialReleaseGateway;
+import br.com.almir.domain.financialrelease.FinancialReleaseID;
 import br.com.almir.domain.subcategory.SubcategoryGateway;
 import br.com.almir.domain.subcategory.SubcategoryID;
 import java.util.List;
@@ -23,11 +26,13 @@ class DeleteSubcategoryUseCaseTest extends UseCaseTest {
   @Mock
   private SubcategoryGateway subCategoryGateway;
 
+  @Mock
+  private FinancialReleaseGateway financialReleaseGateway;
+
   @Override
   protected List<Object> getMocks() {
     return List.of(subCategoryGateway);
   }
-
 
 
   @Test
@@ -53,5 +58,23 @@ class DeleteSubcategoryUseCaseTest extends UseCaseTest {
         () -> useCase.execute(expectedId.getValue()));
 
     Mockito.verify(subCategoryGateway, times(1)).deleteById(eq(expectedId));
+  }
+
+  @Test
+  void givenAValidIdWithFinancialReleases_whenCallsDeleteSubCategory_shouldReturnException() {
+    final var expectedId = SubcategoryID.from(2L);
+
+    final var expectedMessageError = String.format("CategoryID %s there are financial release",
+        expectedId.getValue());
+
+    Mockito.when(financialReleaseGateway.findBySubCategoryIds(List.of(expectedId)))
+        .thenReturn(List.of(FinancialReleaseID.from(1L)));
+
+    DomainException domainException = Assertions.assertThrows(DomainException.class,
+        () -> useCase.execute(expectedId.getValue()));
+
+    Assertions.assertEquals(expectedMessageError, domainException.getMessage());
+
+    Mockito.verify(subCategoryGateway, times(0)).deleteById(eq(expectedId));
   }
 }

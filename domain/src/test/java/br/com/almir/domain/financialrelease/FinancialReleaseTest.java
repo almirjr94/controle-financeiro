@@ -1,9 +1,7 @@
 package br.com.almir.domain.financialrelease;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -36,7 +34,6 @@ class FinancialReleaseTest {
     assertEquals(expectedSubCatergoryID, actualFinancialRelease.getSubcategoryID());
     assertEquals(expectedReleasedAt, actualFinancialRelease.getReleasedAt());
     assertEquals(expectedDescription, actualFinancialRelease.getDescription());
-
 
     assertNotNull(actualFinancialRelease.getCreatedAt());
     assertNotNull(actualFinancialRelease.getUpdatedAt());
@@ -110,7 +107,6 @@ class FinancialReleaseTest {
     final var expectedMoney = FastMoney.of(-1.0, Monetary.getCurrency("BRL"));
     final var expectedReleasedAt = LocalDate.of(2022, Month.JANUARY, 1);
     final var expectedDescription = "Lá lá lá";
-
 
     FinancialRelease actualFinancialRelease = FinancialRelease.newFinancialRelease(money,
         subCatergoryID, description, releasedAt);

@@ -10,10 +10,10 @@ import org.mockito.junit.jupiter.MockitoExtension;
 @ExtendWith(MockitoExtension.class)
 public abstract class UseCaseTest implements BeforeEachCallback {
 
-    @Override
-    public void beforeEach(final ExtensionContext context) throws Exception {
-        Mockito.reset(getMocks().toArray());
-    }
+  @Override
+  public void beforeEach(final ExtensionContext context) throws Exception {
+    Mockito.reset(getMocks().toArray());
+  }
 
-    protected abstract List<Object> getMocks();
+  protected abstract List<Object> getMocks();
 }

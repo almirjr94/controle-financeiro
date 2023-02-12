@@ -17,7 +17,7 @@ public record UpdateFinancialReleaseCommand(
       final String description,
       final LocalDate releasedAt
   ) {
-    return new UpdateFinancialReleaseCommand(id,money, description, releasedAt);
+    return new UpdateFinancialReleaseCommand(id, money, description, releasedAt);
   }
 
 }
