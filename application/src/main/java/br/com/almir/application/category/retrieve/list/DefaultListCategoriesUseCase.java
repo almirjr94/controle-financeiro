@@ -1,6 +1,7 @@
 package br.com.almir.application.category.retrieve.list;
 
 
+import br.com.almir.domain.category.CategoryFilter;
 import br.com.almir.domain.category.CategoryGateway;
 import br.com.almir.domain.pagination.Pagination;
 import br.com.almir.domain.pagination.SearchQuery;
@@ -15,7 +16,7 @@ public class DefaultListCategoriesUseCase extends ListCategoriesUseCase {
   }
 
   @Override
-  public Pagination<CategoryListOutput> execute(final SearchQuery in) {
+  public Pagination<CategoryListOutput> execute(final SearchQuery<CategoryFilter> in) {
     return this.categoryGateway.findAll(in)
         .map(CategoryListOutput::from);
   }

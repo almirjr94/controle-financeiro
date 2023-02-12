@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
-class GetCategoryByIdUseCaseTest extends UseCaseTest {
+class GetCategoryByNameUseCaseTest extends UseCaseTest {
 
   @InjectMocks
   private DefaultGetCategoryByIdUseCase useCase;

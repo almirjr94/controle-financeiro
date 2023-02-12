@@ -1,9 +1,9 @@
 package br.com.almir.domain.pagination;
 
-public record SearchQuery(
+public record SearchQuery<T>(
     int page,
     int perPage,
-    String terms,
+    T filter,
     String sort,
     String direction
 ) {

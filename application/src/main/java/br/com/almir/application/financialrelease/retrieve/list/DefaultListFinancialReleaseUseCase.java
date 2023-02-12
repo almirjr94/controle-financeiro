@@ -1,5 +1,6 @@
 package br.com.almir.application.financialrelease.retrieve.list;
 
+import br.com.almir.domain.financialrelease.FinancialReleaseFilter;
 import br.com.almir.domain.financialrelease.FinancialReleaseGateway;
 import br.com.almir.domain.pagination.Pagination;
 import br.com.almir.domain.pagination.SearchQuery;
@@ -14,7 +15,7 @@ public class DefaultListFinancialReleaseUseCase extends ListFinancialReleaseUseC
   }
 
   @Override
-  public Pagination<FinancialReleaseListOutput> execute(SearchQuery query) {
+  public Pagination<FinancialReleaseListOutput> execute(SearchQuery<FinancialReleaseFilter> query) {
     return financialReleaseGateway.findAll(query)
         .map(FinancialReleaseListOutput::from);
   }

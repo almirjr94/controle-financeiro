@@ -17,7 +17,7 @@ public interface SubcategoryGateway {
 
   Subcategory update(Subcategory subcategory);
 
-  Pagination<Subcategory> findAll(SearchQuery query);
+  Pagination<Subcategory> findAll(SearchQuery<SubcategoryFilter> query);
 
   List<SubcategoryID> findByCategoryId(CategoryID categoryId);
 }

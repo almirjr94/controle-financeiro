@@ -17,7 +17,7 @@ public interface FinancialReleaseGateway {
 
   FinancialRelease update(FinancialRelease financialRelease);
 
-  Pagination<FinancialRelease> findAll(SearchQuery query);
+  Pagination<FinancialRelease> findAll(SearchQuery<FinancialReleaseFilter> query);
 
   List<FinancialReleaseID> findBySubCategoryIds(Iterable<SubcategoryID> subcategoryIDs);
 }

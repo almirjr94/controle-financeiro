@@ -16,7 +16,7 @@ public interface CategoryGateway {
 
   Category update(Category category);
 
-  Pagination<Category> findAll(SearchQuery query);
+  Pagination<Category> findAll(SearchQuery<CategoryFilter> query);
 
   List<CategoryID> existsByIds(Iterable<CategoryID> ids);
 }
