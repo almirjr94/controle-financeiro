@@ -9,4 +9,12 @@ public record BalanceByCategoryCommand(
     CategoryID categoryID
 ) {
 
+  public static BalanceByCategoryCommand with(
+      final LocalDate initDate,
+      final LocalDate endDate,
+      final CategoryID categoryID
+  ) {
+    return new BalanceByCategoryCommand(initDate, endDate, categoryID);
+  }
+
 }
