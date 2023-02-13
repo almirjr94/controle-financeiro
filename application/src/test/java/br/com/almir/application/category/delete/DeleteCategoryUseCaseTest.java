@@ -86,7 +86,7 @@ class DeleteCategoryUseCaseTest extends UseCaseTest {
         expectedId.getValue());
 
     Mockito.when(subcategoryGateway.findByCategoryId(expectedId)).thenReturn(List.of(subcategoryID));
-    Mockito.when(financialReleaseGateway.findBySubCategoryIds(List.of(subcategoryID)))
+    Mockito.when(financialReleaseGateway.findIdsBySubCategoryIds(List.of(subcategoryID)))
         .thenReturn(List.of(FinancialReleaseID.from(1L)));
 
 

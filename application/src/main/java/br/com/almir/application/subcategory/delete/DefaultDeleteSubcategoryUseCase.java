@@ -24,7 +24,7 @@ public class DefaultDeleteSubcategoryUseCase extends DeleteSubcategoryUseCase {
   public void execute(final Long in) {
 
     List<FinancialReleaseID> financialReleaseIDs =
-        financialReleaseGateway.findBySubCategoryIds(List.of(SubcategoryID.from(in)));
+        financialReleaseGateway.findIdsBySubCategoryIds(List.of(SubcategoryID.from(in)));
 
     if (financialReleaseIDs != null && !financialReleaseIDs.isEmpty()) {
       throw DomainException.with(

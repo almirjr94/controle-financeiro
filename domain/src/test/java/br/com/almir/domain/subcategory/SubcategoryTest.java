@@ -7,11 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import br.com.almir.domain.category.CategoryID;
 import br.com.almir.domain.exceptions.DomainException;
-import br.com.almir.domain.financialrelease.FinancialReleaseID;
 import br.com.almir.domain.validation.handler.ThrowsValidationHandler;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class SubcategoryTest {
@@ -63,7 +60,7 @@ class SubcategoryTest {
     final var expectedErrorMessage = "'name' should not be empty";
 
     final var actualSubcategory = Subcategory.newSubcatergory(expectednName,
-        expectedCategoryId);
+        expectedCategoryId).with(expectedId);
 
     final var actualException =
         assertThrows(DomainException.class,
@@ -82,7 +79,7 @@ class SubcategoryTest {
 
     final var expectedName = "Text Novo";
 
-    final var actualSubcategory = Subcategory.newSubcatergory(name, categoryId);
+    final var actualSubcategory = Subcategory.newSubcatergory(name, categoryId).with(id);
 
     final var actualCreatedAt = actualSubcategory.getCreatedAt();
     final var actualUpdatedAt = actualSubcategory.getUpdatedAt();
@@ -93,102 +90,5 @@ class SubcategoryTest {
     assertEquals(expectedName, actualSubcategory.getName());
     assertEquals(actualCreatedAt, actualSubcategory.getCreatedAt());
     assertTrue(actualUpdatedAt.isBefore(actualSubcategory.getUpdatedAt()));
-  }
-
-  @Test
-  void givenAValidEmptyFinancialRelease_whenCallAddFinancialRelease_shouldReceiveOK()
-      throws InterruptedException {
-    final var expectedId = SubcategoryID.from(1L);
-    final String expectedName = "Test";
-    final var expectedCategoryId = CategoryID.from(2L);
-
-    final var expectedFinancialReleases = List.of(FinancialReleaseID.from(1L),
-        FinancialReleaseID.from(2L));
-
-    final var actualSubcategory = Subcategory.newSubcatergory(expectedName,
-        expectedCategoryId);
-
-    final var actualCreatedAt = actualSubcategory.getCreatedAt();
-    final var actualUpdatedAt = actualSubcategory.getUpdatedAt();
-
-    TimeUnit.MILLISECONDS.sleep(1);
-    actualSubcategory.addFinancialRelease(FinancialReleaseID.from(1L));
-    actualSubcategory.addFinancialRelease(FinancialReleaseID.from(2L));
-
-    Assertions.assertEquals(expectedFinancialReleases, actualSubcategory.getFinancialReleases());
-    assertEquals(expectedName, actualSubcategory.getName());
-    assertEquals(actualCreatedAt, actualSubcategory.getCreatedAt());
-    assertTrue(actualUpdatedAt.isBefore(actualSubcategory.getUpdatedAt()));
-  }
-
-  @Test
-  void givenAInvalidNullFinancialRelease_whenCallAddFinancialRelease_shouldReceiveOK()
-      throws InterruptedException {
-    final var expectedId = SubcategoryID.from(1L);
-    final String expectedName = "Test";
-    final var expectedCategoryId = CategoryID.from(2L);
-    final FinancialReleaseID expectedFinancialReleases = null;
-
-    final var actualSubcategory = Subcategory.newSubcatergory(expectedName,
-        expectedCategoryId);
-
-    final var actualCreatedAt = actualSubcategory.getCreatedAt();
-    final var actualUpdatedAt = actualSubcategory.getUpdatedAt();
-
-    TimeUnit.MILLISECONDS.sleep(1);
-    actualSubcategory.addFinancialRelease(expectedFinancialReleases);
-
-    Assertions.assertTrue(actualSubcategory.getFinancialReleases().isEmpty());
-    assertEquals(expectedName, actualSubcategory.getName());
-    assertEquals(actualCreatedAt, actualSubcategory.getCreatedAt());
-    assertEquals(actualUpdatedAt, actualSubcategory.getUpdatedAt());
-  }
-
-  @Test
-  void givenAValidEmptyListOfFinancialRelease_whenCallAddFinancialRelease_shouldReceiveOK()
-      throws InterruptedException {
-    final var expectedId = SubcategoryID.from(1L);
-    final String expectedName = "Test";
-    final var expectedCategoryId = CategoryID.from(2L);
-
-    final var expectedFinancialReleases = List.of(FinancialReleaseID.from(1L),
-        FinancialReleaseID.from(2L));
-
-    final var actualSubcategory = Subcategory.newSubcatergory(expectedName,
-        expectedCategoryId);
-
-    final var actualCreatedAt = actualSubcategory.getCreatedAt();
-    final var actualUpdatedAt = actualSubcategory.getUpdatedAt();
-
-    TimeUnit.MILLISECONDS.sleep(1);
-    actualSubcategory.addFinancialRelease(expectedFinancialReleases);
-
-    Assertions.assertEquals(expectedFinancialReleases, actualSubcategory.getFinancialReleases());
-    assertEquals(expectedName, actualSubcategory.getName());
-    assertEquals(actualCreatedAt, actualSubcategory.getCreatedAt());
-    assertTrue(actualUpdatedAt.isBefore(actualSubcategory.getUpdatedAt()));
-  }
-
-  @Test
-  void givenAInvalidNullLifOfFinancialRelease_whenCallAddFinancialRelease_shouldReceiveOK()
-      throws InterruptedException {
-    final var expectedId = SubcategoryID.from(1L);
-    final String expectedName = "Test";
-    final var expectedCategoryId = CategoryID.from(2L);
-    final List<FinancialReleaseID> expectedFinancialReleases = null;
-
-    final var actualSubcategory = Subcategory.newSubcatergory(expectedName,
-        expectedCategoryId);
-
-    final var actualCreatedAt = actualSubcategory.getCreatedAt();
-    final var actualUpdatedAt = actualSubcategory.getUpdatedAt();
-
-    TimeUnit.MILLISECONDS.sleep(1);
-    actualSubcategory.addFinancialRelease(expectedFinancialReleases);
-
-    Assertions.assertTrue(actualSubcategory.getFinancialReleases().isEmpty());
-    assertEquals(expectedName, actualSubcategory.getName());
-    assertEquals(actualCreatedAt, actualSubcategory.getCreatedAt());
-    assertEquals(actualUpdatedAt, actualSubcategory.getUpdatedAt());
   }
 }

@@ -14,21 +14,18 @@ public class Subcategory extends AggregateRoot<SubcategoryID> {
 
   private String name;
   private CategoryID categoryID;
-  private List<FinancialReleaseID> financialReleases;
   private Instant createdAt;
   private Instant updatedAt;
 
   private Subcategory(final SubcategoryID subcategoryId,
       final String name,
       final CategoryID categoryID,
-      final List<FinancialReleaseID> financialReleases,
       final Instant createdAt,
       final Instant updatedAt) {
 
     super(subcategoryId);
     this.name = name;
     this.categoryID = Objects.requireNonNull(categoryID, "'categoryID' should not be null");
-    this.financialReleases = financialReleases;
     this.createdAt = createdAt;
     this.updatedAt = updatedAt;
   }
@@ -38,7 +35,7 @@ public class Subcategory extends AggregateRoot<SubcategoryID> {
       final CategoryID category
   ) {
     var now = Instant.now();
-    return new Subcategory(null, name, category, new ArrayList<>(), now, now);
+    return new Subcategory(null, name, category, now, now);
   }
 
   public Subcategory with(final SubcategoryID subcategoryID) {
@@ -56,31 +53,9 @@ public class Subcategory extends AggregateRoot<SubcategoryID> {
     return this;
   }
 
-  public Subcategory addFinancialRelease(final FinancialReleaseID financialReleaseID) {
-    if (financialReleaseID == null) {
-      return this;
-    }
-    this.financialReleases.add(financialReleaseID);
-    this.updatedAt = Instant.now();
-    return this;
-  }
-
-  public Subcategory addFinancialRelease(final List<FinancialReleaseID> financialReleases) {
-    if (financialReleases == null || financialReleases.isEmpty()) {
-      return this;
-    }
-    this.financialReleases.addAll(financialReleases);
-    this.updatedAt = Instant.now();
-    return this;
-  }
-
   @Override
   public void validate(ValidationHandler handler) {
     new SubCategoryValidator(this, handler).validate();
-  }
-
-  public List<FinancialReleaseID> getFinancialReleases() {
-    return Collections.unmodifiableList(financialReleases);
   }
 
   public String getName() {

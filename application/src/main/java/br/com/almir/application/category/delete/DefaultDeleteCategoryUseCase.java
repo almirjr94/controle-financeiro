@@ -27,7 +27,7 @@ public class DefaultDeleteCategoryUseCase extends DeleteCategoryUseCase {
   @Override
   public void execute(final Long in) {
     List<SubcategoryID> categoryIds = subcategoryGateway.findByCategoryId(CategoryID.from(in));
-    List<FinancialReleaseID> financialReleaseIDs = financialReleaseGateway.findBySubCategoryIds(
+    List<FinancialReleaseID> financialReleaseIDs = financialReleaseGateway.findIdsBySubCategoryIds(
         categoryIds);
 
     if (financialReleaseIDs != null && !financialReleaseIDs.isEmpty()) {
