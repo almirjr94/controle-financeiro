@@ -51,7 +51,7 @@ public class CategoryController implements CategoryAPI {
 
     CreateCategoryOutput output = createCategoryUseCase.execute(command);
 
-    return ResponseEntity.created(URI.create("/categories/" + output.id())).body(output);
+    return ResponseEntity.created(URI.create("v1/categories/" + output.id())).body(output);
   }
 
   @Override

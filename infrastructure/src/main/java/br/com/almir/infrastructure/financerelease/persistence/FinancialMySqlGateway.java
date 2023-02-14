@@ -86,7 +86,7 @@ public class FinancialMySqlGateway implements FinancialReleaseGateway {
         .map(SubcategoryID::getValue)
         .toList();
 
-    return repository.findBySubcategoryIn(ids)
+    return repository.findBySubcategoryIdIn(ids)
         .stream()
         .map(it -> FinancialReleaseID.from(it.getId()))
         .toList();

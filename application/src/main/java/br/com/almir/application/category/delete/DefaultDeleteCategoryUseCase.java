@@ -36,6 +36,7 @@ public class DefaultDeleteCategoryUseCase extends DeleteCategoryUseCase {
           new Error(String.format("CategoryID %s there are financial release", in)));
     }
 
+    categoryIds.forEach(subcategoryGateway::deleteById);
     this.categoryGateway.deleteById(CategoryID.from(in));
   }
 }

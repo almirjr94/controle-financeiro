@@ -1,9 +1,9 @@
 package br.com.almir.infrastructure.api;
 
 import br.com.almir.domain.pagination.Pagination;
-import br.com.almir.infrastructure.category.model.CategoryResponse;
-import br.com.almir.infrastructure.category.model.CreateCategoryApiInput;
-import br.com.almir.infrastructure.category.model.UpdateCategoryRequest;
+import br.com.almir.infrastructure.subcategory.model.CreateSubcategoryApiInput;
+import br.com.almir.infrastructure.subcategory.model.SubcategoryResponse;
+import br.com.almir.infrastructure.subcategory.model.UpdateSubcategoryRequest;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -36,7 +36,7 @@ public interface SubcategoryAPI {
       @ApiResponse(responseCode = "422", description = "A validation error was thrown"),
       @ApiResponse(responseCode = "500", description = "An Internal server error was thrown"),
   })
-  ResponseEntity<?> createSubcategory(@RequestBody CreateCategoryApiInput input);
+  ResponseEntity<?> createSubcategory(@RequestBody CreateSubcategoryApiInput input);
 
 
   @GetMapping
@@ -52,7 +52,7 @@ public interface SubcategoryAPI {
       @RequestParam(name = "sort", required = false, defaultValue = "name") final String sort,
       @RequestParam(name = "dir", required = false, defaultValue = "asc") final String dir,
       @RequestParam(name = "name", required = false) final String searchName,
-      @RequestParam(name = "subcategoryId", required = false) final String searchSubcategory
+      @RequestParam(name = "subcategoryId", required = false) final Long searchSubcategoryId
   );
 
   @GetMapping(
@@ -65,7 +65,7 @@ public interface SubcategoryAPI {
       @ApiResponse(responseCode = "404", description = "Subcategory was not found"),
       @ApiResponse(responseCode = "500", description = "An internal server error was thrown"),
   })
-  CategoryResponse getById(@PathVariable(name = "id") Long id);
+  SubcategoryResponse getById(@PathVariable(name = "id") Long id);
 
 
   @PutMapping(
@@ -79,7 +79,8 @@ public interface SubcategoryAPI {
       @ApiResponse(responseCode = "404", description = "Subcategory was not found"),
       @ApiResponse(responseCode = "500", description = "An internal server error was thrown"),
   })
-  ResponseEntity<?> updateById(@PathVariable(name = "id") Long id, @RequestBody UpdateCategoryRequest input);
+  ResponseEntity<?> updateById(@PathVariable(name = "id") Long id,
+      @RequestBody UpdateSubcategoryRequest input);
 
 
   @DeleteMapping(value = "{id}")

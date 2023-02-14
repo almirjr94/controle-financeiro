@@ -7,7 +7,6 @@ import br.com.almir.domain.subcategory.Subcategory;
 import br.com.almir.domain.subcategory.SubcategoryFilter;
 import br.com.almir.domain.subcategory.SubcategoryGateway;
 import br.com.almir.domain.subcategory.SubcategoryID;
-import br.com.almir.infrastructure.category.persistence.CategoryJpaEntity;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -76,6 +75,11 @@ public class SubcategoryMySQLGateway implements SubcategoryGateway {
   }
 
   @Override
+  public boolean existsByCategoryIdAndName(CategoryID categoryID, String name) {
+    return repository.existsByCategoryIdAndName(categoryID.getValue(), name);
+  }
+
+  @Override
   public List<SubcategoryID> findByCategoryId(CategoryID categoryId) {
     return repository.findByCategoryId(categoryId.getValue())
         .stream()
@@ -84,18 +88,21 @@ public class SubcategoryMySQLGateway implements SubcategoryGateway {
         .toList();
   }
 
-  private Specification<SubcategoryJpaEntity> specificaton(final SubcategoryFilter str) {
+  private Specification<SubcategoryJpaEntity> specificaton(final SubcategoryFilter filter) {
     return (root, query, cb) -> {
       List<Predicate> predicates = new ArrayList<>();
 
-      if (str.name() != null && !str.name().isBlank()) {
-        predicates.add(cb.like(cb.lower(root.get("name")), "%" + str.name().toLowerCase() + "%"));
+      if (filter.name() != null && !filter.name().isBlank()) {
+        predicates.add(cb.like(cb.lower(root.get("name")), "%" + filter.name().toLowerCase() + "%"));
       }
 
-      if (str.name() != null && !str.name().isBlank()) {
-        predicates.add(cb.equal(root.get("id"), str.id().getValue().toString()));
+      if (filter.id() != null) {
+        predicates.add(cb.equal(root.get("id"), filter.id().getValue().toString()));
       }
 
+      if (predicates.isEmpty()) {
+        return null;
+      }
       return cb.or(predicates.toArray(new Predicate[0]));
     };
   }

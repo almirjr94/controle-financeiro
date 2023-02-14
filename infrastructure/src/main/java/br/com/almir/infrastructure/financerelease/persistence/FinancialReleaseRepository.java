@@ -14,7 +14,7 @@ public interface FinancialReleaseRepository extends JpaRepository<FinancialRelea
   List<FinancialReleaseJpaEntity> findByReleasedAtBetweenAndSubcategoryIn(LocalDate start,
       LocalDate end, List<Long> categoryId);
 
-  List<FinancialReleaseJpaEntity> findBySubcategoryIn(Iterable<Long> ids);
+  List<FinancialReleaseJpaEntity> findBySubcategoryIdIn(Iterable<Long> ids);
 
   Page<FinancialReleaseJpaEntity> findAll(Specification<FinancialReleaseJpaEntity> whereClause,
       Pageable page);

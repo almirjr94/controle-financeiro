@@ -2,6 +2,8 @@ package br.com.almir.domain.category;
 
 
 import br.com.almir.domain.Identifier;
+import br.com.almir.domain.exceptions.DomainException;
+import br.com.almir.domain.validation.Error;
 import java.util.Objects;
 
 public class CategoryID extends Identifier {
@@ -11,7 +13,7 @@ public class CategoryID extends Identifier {
   private CategoryID(final Long value) {
     Objects.requireNonNull(value);
     if (Long.signum(value) != 1) {
-      throw new IllegalArgumentException("Category 'id' should be positive");
+      throw DomainException.with(new Error("Category 'id' should be positive"));
     }
     this.value = value;
   }

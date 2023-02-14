@@ -53,7 +53,7 @@ public class SubcategoryJpaEntity {
 
   public static SubcategoryJpaEntity from(final Subcategory subcategory) {
     return new SubcategoryJpaEntity(
-        subcategory.getId().getValue(),
+        subcategory.getId() != null ? subcategory.getId().getValue() : null,
         subcategory.getName(),
         CategoryJpaEntity.from(subcategory.getCategoryID()),
         subcategory.getCreatedAt(),

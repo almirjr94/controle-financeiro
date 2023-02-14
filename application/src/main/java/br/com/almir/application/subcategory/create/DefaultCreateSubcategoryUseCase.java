@@ -27,6 +27,11 @@ public class DefaultCreateSubcategoryUseCase extends CreateSubcategoryUseCase {
     Category category = this.categoryGateway.findById(in.categoryID())
         .orElseThrow(() -> NotFoundException.with(Category.class, in.categoryID()));
 
+    if (subcategoryGateway.existsByCategoryIdAndName(category.getId(), in.name())) {
+      throw DomainException.with(
+          new Error(String.format("Subcategory with name %s already exists", in.name())));
+    }
+
     final Subcategory newSubcategory = Subcategory.newSubcatergory(in.name(), category.getId());
     newSubcategory.validate(new ThrowsValidationHandler());
 

@@ -2,6 +2,8 @@ package br.com.almir.domain.subcategory;
 
 
 import br.com.almir.domain.Identifier;
+import br.com.almir.domain.exceptions.DomainException;
+import br.com.almir.domain.validation.Error;
 import java.util.Objects;
 
 public class SubcategoryID extends Identifier {
@@ -11,7 +13,7 @@ public class SubcategoryID extends Identifier {
   private SubcategoryID(final Long value) {
     Objects.requireNonNull(value);
     if (Long.signum(value) != 1) {
-      throw new IllegalArgumentException("SubCategory 'id' should be positive");
+      throw DomainException.with(new Error("SubCategory 'id' should be positive"));
     }
     this.value = value;
   }

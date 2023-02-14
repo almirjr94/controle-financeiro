@@ -19,5 +19,7 @@ public interface SubcategoryGateway {
 
   Pagination<Subcategory> findAll(SearchQuery<SubcategoryFilter> query);
 
+  boolean existsByCategoryIdAndName(CategoryID categoryID, String name);
+
   List<SubcategoryID> findByCategoryId(CategoryID categoryId);
 }

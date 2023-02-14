@@ -20,7 +20,7 @@ public class GlobalExceptionHandler {
 
   @ExceptionHandler(value = DomainException.class)
   public ResponseEntity<?> handleDomainException(final DomainException ex) {
-    return ResponseEntity.unprocessableEntity().body(ApiErrors.from(ex));
+    return ResponseEntity.badRequest().body(ApiErrors.from(ex));
   }
 
   record ApiError(String message) {
