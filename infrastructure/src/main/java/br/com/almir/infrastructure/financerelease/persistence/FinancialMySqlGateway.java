@@ -99,7 +99,7 @@ public class FinancialMySqlGateway implements FinancialReleaseGateway {
         .map(SubcategoryID::getValue)
         .toList();
 
-    return repository.findByReleasedAtBetweenAndSubcategoryIn(start, end, ids)
+    return repository.findByReleasedAtBetweenAndSubcategoryIdIn(start, end, ids)
         .stream()
         .map(FinancialReleaseJpaEntity::toAggregate)
         .toList();

@@ -39,6 +39,7 @@ public class FinancialReleaseController implements FinancialReleaseAPI {
       ListFinancialReleaseUseCase listFinancialReleaseUseCase,
       UpdateFinancialReleaseUseCase updateFinancialReleaseUseCase,
       DeleteFinancialReleaseUseCase deleteFinancialReleaseUseCase) {
+
     this.createFinancialReleaseUseCase = Objects.requireNonNull(createFinancialReleaseUseCase);
     this.getFinancialReleaseUseCase = Objects.requireNonNull(getFinancialReleaseUseCase);
     this.listFinancialReleaseUseCase = Objects.requireNonNull(listFinancialReleaseUseCase);
