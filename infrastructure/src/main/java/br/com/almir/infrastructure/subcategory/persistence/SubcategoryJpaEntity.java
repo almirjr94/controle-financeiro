@@ -29,7 +29,7 @@ public class SubcategoryJpaEntity {
   @Column(name = "name", nullable = false)
   private String name;
 
-  @OneToOne(cascade = CascadeType.REMOVE)
+  @OneToOne
   @JoinColumn(name = "category_id", nullable = false)
   private CategoryJpaEntity category;
 

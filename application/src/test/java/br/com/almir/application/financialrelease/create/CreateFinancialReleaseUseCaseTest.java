@@ -10,6 +10,7 @@ import br.com.almir.domain.exceptions.DomainException;
 import br.com.almir.domain.financialrelease.FinancialRelease;
 import br.com.almir.domain.financialrelease.FinancialReleaseGateway;
 import br.com.almir.domain.financialrelease.FinancialReleaseID;
+import br.com.almir.domain.subcategory.SubcategoryGateway;
 import br.com.almir.domain.subcategory.SubcategoryID;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -31,10 +32,12 @@ class CreateFinancialReleaseUseCaseTest extends UseCaseTest {
 
   @Mock
   private FinancialReleaseGateway financialReleaseGateway;
+  @Mock
+  private SubcategoryGateway subcategoryGateway;
 
   @Override
   protected List<Object> getMocks() {
-    return List.of(financialReleaseGateway);
+    return List.of(financialReleaseGateway, subcategoryGateway);
   }
 
   @Test

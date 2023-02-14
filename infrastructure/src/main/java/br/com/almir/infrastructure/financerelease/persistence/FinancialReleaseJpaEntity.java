@@ -24,7 +24,7 @@ public class FinancialReleaseJpaEntity {
   @GeneratedValue
   private Long id;
 
-  @OneToOne(cascade = CascadeType.REMOVE)
+  @OneToOne
   @JoinColumn(name = "subcategory_id", nullable = false)
   private SubcategoryJpaEntity subcategory;
 
