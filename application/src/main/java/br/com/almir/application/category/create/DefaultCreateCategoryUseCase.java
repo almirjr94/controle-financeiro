@@ -19,6 +19,12 @@ public class DefaultCreateCategoryUseCase extends CreateCategoryUseCase {
   public CreateCategoryOutput execute(CreateCategoryCommand in) {
     final Category newCategory = Category.newCategory(in.name());
     newCategory.validate(new ThrowsValidationHandler());
+
+    if (categoryGateway.existByName(in.name())) {
+      throw DomainException.with(
+          new Error(String.format("Category with name %s already exists", in.name())));
+    }
+
     final var category = categoryGateway.create(newCategory);
     if (category.getId() == null) {
       throw DomainException.with(new Error("Category Gateway returned an 'id' null"));

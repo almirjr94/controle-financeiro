@@ -65,6 +65,11 @@ public class CategoryMySQLGateway implements CategoryGateway {
         pageResult.map(CategoryJpaEntity::toAggregate).toList());
   }
 
+  @Override
+  public boolean existByName(String name) {
+    return repository.existsByName(name);
+  }
+
   private Category save(Category category) {
     CategoryJpaEntity save = repository.save(CategoryJpaEntity.from(category));
     return save.toAggregate();

@@ -16,4 +16,6 @@ public interface CategoryGateway {
   Category update(Category category);
 
   Pagination<Category> findAll(SearchQuery<CategoryFilter> query);
+
+  boolean existByName(String name);
 }

@@ -7,11 +7,11 @@ public record UpdateCategoryOutput(
     Long id
 ) {
 
-  public static UpdateCategoryOutput from(final Long anId) {
-    return new UpdateCategoryOutput(anId);
+  public static UpdateCategoryOutput from(final Long id) {
+    return new UpdateCategoryOutput(id);
   }
 
-  public static UpdateCategoryOutput from(final Category aCategory) {
-    return new UpdateCategoryOutput(aCategory.getId().getValue());
+  public static UpdateCategoryOutput from(final Category category) {
+    return new UpdateCategoryOutput(category.getId().getValue());
   }
 }
