@@ -100,6 +100,7 @@ class CreateCategoryUseCaseTest extends UseCaseTest {
   void givenAValidCommand_whenCallsCreateCategoryNotReturnId_shouldReturnAnError() {
     final var expectedName = "Test";
     final var expectedErrorMessage = "Category Gateway returned an 'id' null";
+    final var expectedErrorNum = 1;
 
     final var aCommand = CreateCategoryCommand.with(expectedName);
 
@@ -109,7 +110,8 @@ class CreateCategoryUseCaseTest extends UseCaseTest {
     DomainException domainException = Assertions.assertThrows(DomainException.class,
         () -> useCase.execute(aCommand));
 
-    Assertions.assertEquals(expectedErrorMessage, domainException.getMessage());
+    Assertions.assertEquals(expectedErrorMessage, domainException.getErrors().get(0).message());
+    Assertions.assertEquals(expectedErrorNum, domainException.getErrors().size());
 
     Mockito.verify(categoryGateway, times(1))
         .create(argThat(aCategory -> Objects.equals(expectedName, aCategory.getName())

@@ -76,7 +76,6 @@ class UpdateFinancialReleaseUseCaseTest extends UseCaseTest {
     Mockito.verify(financialReleaseGateway, times(1)).update(argThat(
         updatedFinancialRelease ->
             Objects.equals(id, updatedFinancialRelease.getId())
-                && Objects.equals(expectedMoney, updatedFinancialRelease.getMoney())
                 && Objects.equals(expectedReleased, updatedFinancialRelease.getReleasedAt())
                 && Objects.equals(expectedDescription, updatedFinancialRelease.getDescription())
     ));

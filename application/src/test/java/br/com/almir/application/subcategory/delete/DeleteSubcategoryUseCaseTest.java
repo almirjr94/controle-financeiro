@@ -73,7 +73,7 @@ class DeleteSubcategoryUseCaseTest extends UseCaseTest {
     DomainException domainException = Assertions.assertThrows(DomainException.class,
         () -> useCase.execute(expectedId.getValue()));
 
-    Assertions.assertEquals(expectedMessageError, domainException.getMessage());
+    Assertions.assertEquals(expectedMessageError, domainException.getErrors().get(0).message());
 
     Mockito.verify(subCategoryGateway, times(0)).deleteById(eq(expectedId));
   }

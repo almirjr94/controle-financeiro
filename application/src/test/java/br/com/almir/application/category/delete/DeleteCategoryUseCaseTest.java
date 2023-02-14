@@ -85,15 +85,15 @@ class DeleteCategoryUseCaseTest extends UseCaseTest {
     final var expectedMessageError = String.format("CategoryID %s there are financial release",
         expectedId.getValue());
 
-    Mockito.when(subcategoryGateway.findByCategoryId(expectedId)).thenReturn(List.of(subcategoryID));
+    Mockito.when(subcategoryGateway.findByCategoryId(expectedId))
+        .thenReturn(List.of(subcategoryID));
     Mockito.when(financialReleaseGateway.findIdsBySubCategoryIds(List.of(subcategoryID)))
         .thenReturn(List.of(FinancialReleaseID.from(1L)));
-
 
     DomainException domainException = Assertions.assertThrows(DomainException.class,
         () -> useCase.execute(expectedId.getValue()));
 
-    Assertions.assertEquals(expectedMessageError, domainException.getMessage());
+    Assertions.assertEquals(expectedMessageError, domainException.getErrors().get(0).message());
 
     Mockito.verify(categoryGateway, times(0)).deleteById(eq(expectedId));
   }
