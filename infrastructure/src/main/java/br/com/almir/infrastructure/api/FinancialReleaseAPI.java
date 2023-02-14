@@ -5,6 +5,7 @@ import br.com.almir.infrastructure.financerelease.model.CreateFinancialReleaseAp
 import br.com.almir.infrastructure.financerelease.model.FinancialReleaseResponse;
 import br.com.almir.infrastructure.financerelease.model.UpdateFinancialReleaseRequest;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -51,8 +52,8 @@ public interface FinancialReleaseAPI {
       @RequestParam(name = "perPage", required = false, defaultValue = "10") final int perPage,
       @RequestParam(name = "sort", required = false, defaultValue = "releasedAt") final String sort,
       @RequestParam(name = "dir", required = false, defaultValue = "asc") final String dir,
-      @RequestParam(name = "initDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") final LocalDate initDate,
-      @RequestParam(name = "endDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") final LocalDate endDate,
+      @RequestParam(name = "initDate", required = false) @Parameter(example = "2022-02-15") @DateTimeFormat(pattern = "yyyy-MM-dd") final LocalDate initDate,
+      @RequestParam(name = "endDate", required = false) @Parameter(example = "2022-02-19") @DateTimeFormat(pattern = "yyyy-MM-dd") final LocalDate endDate,
       @RequestParam(name = "subcategoryId", required = false) final Long searchSubcategoryId
   );
 

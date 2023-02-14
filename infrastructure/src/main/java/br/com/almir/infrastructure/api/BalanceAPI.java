@@ -1,7 +1,7 @@
 package br.com.almir.infrastructure.api;
 
-import br.com.almir.infrastructure.category.model.CategoryResponse;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -27,8 +27,8 @@ public interface BalanceAPI {
       @ApiResponse(responseCode = "500", description = "An internal server error was thrown"),
   })
   ResponseEntity<?> getByDateBetween(
-      @RequestParam(name = "initDate", required = true) @DateTimeFormat(pattern = "yyyy-MM-dd") final LocalDate initDate,
-      @RequestParam(name = "endDate", required = true) @DateTimeFormat(pattern = "yyyy-MM-dd") final LocalDate endDate,
+      @RequestParam(name = "initDate", required = true) @Parameter(example = "2022-02-15") @DateTimeFormat(pattern = "yyyy-MM-dd") final LocalDate initDate,
+      @RequestParam(name = "endDate", required = true) @Parameter(example = "2022-02-19") @DateTimeFormat(pattern = "yyyy-MM-dd") final LocalDate endDate,
       @RequestParam(name = "categoryId", required = false) final Long categoryId);
 
 
