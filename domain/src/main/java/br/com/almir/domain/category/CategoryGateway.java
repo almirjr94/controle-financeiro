@@ -3,7 +3,6 @@ package br.com.almir.domain.category;
 
 import br.com.almir.domain.pagination.Pagination;
 import br.com.almir.domain.pagination.SearchQuery;
-import java.util.List;
 import java.util.Optional;
 
 public interface CategoryGateway {
@@ -17,6 +16,4 @@ public interface CategoryGateway {
   Category update(Category category);
 
   Pagination<Category> findAll(SearchQuery<CategoryFilter> query);
-
-  List<CategoryID> existsByIds(Iterable<CategoryID> ids);
 }

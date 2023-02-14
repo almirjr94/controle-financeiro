@@ -18,7 +18,8 @@ public class DefaultDeleteCategoryUseCase extends DeleteCategoryUseCase {
   private final FinancialReleaseGateway financialReleaseGateway;
 
   public DefaultDeleteCategoryUseCase(final CategoryGateway categoryGateway,
-      SubcategoryGateway subcategoryGateway, FinancialReleaseGateway financialReleaseGateway) {
+      SubcategoryGateway subcategoryGateway,
+      FinancialReleaseGateway financialReleaseGateway) {
     this.categoryGateway = Objects.requireNonNull(categoryGateway);
     this.subcategoryGateway = Objects.requireNonNull(subcategoryGateway);
     this.financialReleaseGateway = Objects.requireNonNull(financialReleaseGateway);

@@ -9,7 +9,7 @@ import java.util.Objects;
 import javax.money.MonetaryAmount;
 import org.javamoney.moneta.FastMoney;
 
-public class DefaultGetBalanceUseCase extends GetBalanceUseCase {
+public class DefaultBalanceUseCase extends BalanceUseCase {
 
   public static final String THERE_IS_NO_BALANCE = "Category there is no balance";
   public static final FastMoney ZERO = FastMoney.of(0, "BRL");
@@ -17,7 +17,7 @@ public class DefaultGetBalanceUseCase extends GetBalanceUseCase {
 
   private final FinancialReleaseGateway financialReleaseGateway;
 
-  public DefaultGetBalanceUseCase(
+  public DefaultBalanceUseCase(
       FinancialReleaseGateway financialReleaseGateway
   ) {
 

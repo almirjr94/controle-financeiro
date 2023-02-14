@@ -1,7 +1,9 @@
 package br.com.almir.application.subcategory.create;
 
-import br.com.almir.application.category.retrieve.get.GetCategoryByIdUseCase;
+import br.com.almir.domain.category.Category;
+import br.com.almir.domain.category.CategoryGateway;
 import br.com.almir.domain.exceptions.DomainException;
+import br.com.almir.domain.exceptions.NotFoundException;
 import br.com.almir.domain.subcategory.Subcategory;
 import br.com.almir.domain.subcategory.SubcategoryGateway;
 import br.com.almir.domain.validation.Error;
@@ -11,20 +13,21 @@ import java.util.Objects;
 public class DefaultCreateSubcategoryUseCase extends CreateSubcategoryUseCase {
 
   private final SubcategoryGateway subcategoryGateway;
-  private final GetCategoryByIdUseCase getCategoryByIdUseCase;
+  private final CategoryGateway categoryGateway;
 
-  public DefaultCreateSubcategoryUseCase(SubcategoryGateway categoryGateway,
-      GetCategoryByIdUseCase getCategoryByIdUseCase) {
-    this.subcategoryGateway = Objects.requireNonNull(categoryGateway);
-    this.getCategoryByIdUseCase = Objects.requireNonNull(getCategoryByIdUseCase);
+  public DefaultCreateSubcategoryUseCase(SubcategoryGateway subcategoryGateway,
+      CategoryGateway categoryGateway) {
+    this.subcategoryGateway = Objects.requireNonNull(subcategoryGateway);
+    this.categoryGateway = Objects.requireNonNull(categoryGateway);
   }
 
   @Override
   public CreateSubcategoryOutput execute(CreateSubcategoryCommand in) {
 
-    getCategoryByIdUseCase.execute(in.categoryID().getValue());
+    Category category = this.categoryGateway.findById(in.categoryID())
+        .orElseThrow(() -> NotFoundException.with(Category.class, in.categoryID()));
 
-    final Subcategory newSubcategory = Subcategory.newSubcatergory(in.name(), in.categoryID());
+    final Subcategory newSubcategory = Subcategory.newSubcatergory(in.name(), category.getId());
     newSubcategory.validate(new ThrowsValidationHandler());
 
     final var subcategory = subcategoryGateway.create(newSubcategory);

@@ -2,12 +2,8 @@ package br.com.almir.domain.subcategory;
 
 import br.com.almir.domain.AggregateRoot;
 import br.com.almir.domain.category.CategoryID;
-import br.com.almir.domain.financialrelease.FinancialReleaseID;
 import br.com.almir.domain.validation.ValidationHandler;
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.Objects;
 
 public class Subcategory extends AggregateRoot<SubcategoryID> {
@@ -43,6 +39,16 @@ public class Subcategory extends AggregateRoot<SubcategoryID> {
       super.id = subcategoryID;
     }
     return this;
+  }
+
+  public static Subcategory with(
+      final SubcategoryID subcategoryID,
+      final String name,
+      final CategoryID categoryID,
+      final Instant createdAt,
+      final Instant updatedAt
+  ) {
+    return new Subcategory(subcategoryID, name, categoryID, createdAt, updatedAt);
   }
 
   public Subcategory update(

@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Objects;
 import javax.money.MonetaryAmount;
 
-public class DefaultGetBalanceByCategorieUseCase extends GetBalanceByCategorieUseCase {
+public class DefaultBalanceByCategorieUseCase extends BalanceByCategorieUseCase {
 
   public static final String THERE_IS_NO_BALANCE = "Category there is no balance";
 
@@ -23,7 +23,7 @@ public class DefaultGetBalanceByCategorieUseCase extends GetBalanceByCategorieUs
   private final SubcategoryGateway subcategoryGateway;
   private final FinancialReleaseGateway financialReleaseGateway;
 
-  public DefaultGetBalanceByCategorieUseCase(
+  public DefaultBalanceByCategorieUseCase(
       CategoryGateway categoryGateway,
       SubcategoryGateway subcategoryGateway,
       FinancialReleaseGateway financialReleaseGateway

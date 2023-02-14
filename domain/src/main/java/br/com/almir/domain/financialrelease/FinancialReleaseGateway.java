@@ -10,7 +10,7 @@ import java.util.Optional;
 
 public interface FinancialReleaseGateway {
 
-  FinancialRelease create(FinancialRelease subcategory);
+  FinancialRelease create(FinancialRelease financialRelease);
 
   void deleteById(FinancialReleaseID id);
 

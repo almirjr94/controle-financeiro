@@ -5,9 +5,11 @@ import br.com.almir.domain.exceptions.NotificationException;
 import br.com.almir.domain.subcategory.SubcategoryID;
 import br.com.almir.domain.validation.ValidationHandler;
 import br.com.almir.domain.validation.handler.Notification;
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.time.LocalDate;
 import javax.money.MonetaryAmount;
+import org.javamoney.moneta.FastMoney;
 
 public class FinancialRelease extends AggregateRoot<FinancialReleaseID> {
 
@@ -58,6 +60,18 @@ public class FinancialRelease extends AggregateRoot<FinancialReleaseID> {
     return this;
   }
 
+  public static FinancialRelease with(
+      final FinancialReleaseID financialReleaseID,
+      final BigDecimal money,
+      final SubcategoryID subcategoryID,
+      final String describe,
+      final LocalDate releasedAt,
+      final Instant createdAt,
+      final Instant updatedAt
+  ) {
+    return new FinancialRelease(financialReleaseID,
+        FastMoney.of(money, "BRL"), subcategoryID, describe, releasedAt, createdAt, updatedAt);
+  }
 
   public FinancialRelease update(
       final MonetaryAmount money,

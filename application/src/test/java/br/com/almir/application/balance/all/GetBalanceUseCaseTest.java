@@ -17,7 +17,7 @@ import org.mockito.Mockito;
 class GetBalanceUseCaseTest extends UseCaseTest {
 
   @InjectMocks
-  private DefaultGetBalanceUseCase useCase;
+  private DefaultBalanceUseCase useCase;
 
 
   @Mock

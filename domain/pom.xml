@@ -9,7 +9,6 @@
     <version>1.0-SNAPSHOT</version>
   </parent>
 
-  <groupId>br.com.almir.domain</groupId>
   <artifactId>domain</artifactId>
 
   <properties>

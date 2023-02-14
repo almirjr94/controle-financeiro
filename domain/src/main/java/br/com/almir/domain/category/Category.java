@@ -36,6 +36,17 @@ public class Category extends AggregateRoot<CategoryID> {
     return this;
   }
 
+  public static Category with(
+      final CategoryID categoryID,
+      final String name,
+      final Instant createdAt,
+      final Instant updatedAt
+
+  ) {
+    return new Category(categoryID, name, createdAt, updatedAt);
+  }
+
+
   public Category update(
       final String name
   ) {

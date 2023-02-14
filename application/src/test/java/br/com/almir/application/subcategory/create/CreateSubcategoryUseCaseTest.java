@@ -6,8 +6,8 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.when;
 
 import br.com.almir.application.UseCaseTest;
-import br.com.almir.application.category.retrieve.get.GetCategoryByIdUseCase;
 import br.com.almir.domain.category.Category;
+import br.com.almir.domain.category.CategoryGateway;
 import br.com.almir.domain.category.CategoryID;
 import br.com.almir.domain.exceptions.DomainException;
 import br.com.almir.domain.exceptions.NotFoundException;
@@ -16,6 +16,7 @@ import br.com.almir.domain.subcategory.SubcategoryGateway;
 import br.com.almir.domain.subcategory.SubcategoryID;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -31,7 +32,7 @@ class CreateSubcategoryUseCaseTest extends UseCaseTest {
   private SubcategoryGateway subcategoryGateway;
 
   @Mock
-  private GetCategoryByIdUseCase getCategoryByIdUseCase;
+  private CategoryGateway categoryGateway;
 
   @Override
   protected List<Object> getMocks() {
@@ -44,11 +45,16 @@ class CreateSubcategoryUseCaseTest extends UseCaseTest {
     final var expectedCategoryID = CategoryID.from(1L);
     final var expectedID = SubcategoryID.from(3L);
 
-    CreateSubcategoryCommand command = CreateSubcategoryCommand.with(expectedName,
-        expectedCategoryID);
+    Category category = Category.newCategory("Teste").with(expectedCategoryID);
+
+    Mockito.when(categoryGateway.findById(expectedCategoryID)).
+        thenReturn(Optional.of(category));
 
     when(subcategoryGateway.create(any()))
         .thenReturn(Subcategory.newSubcatergory(expectedName, expectedCategoryID).with(expectedID));
+
+    CreateSubcategoryCommand command = CreateSubcategoryCommand.with(expectedName,
+        expectedCategoryID);
 
     CreateSubcategoryOutput actualOutput = useCase.execute(command);
 
@@ -64,12 +70,17 @@ class CreateSubcategoryUseCaseTest extends UseCaseTest {
   }
 
   @Test
-  void givenAInvalidName_whenCallsCreateCategory_thenShouldReturnDomainException() {
+  void givenAInvalidName_whenCallsCreateSubcategory_thenShouldReturnDomainException() {
     final String expectedName = null;
     final var expectedCategoryID = CategoryID.from(1L);
 
     final var expectedErrorMessage = "'name' should not be null";
     final var expectedErrorCount = 1;
+
+    Category category = Category.newCategory("Teste").with(CategoryID.from(2L));
+
+    Mockito.when(categoryGateway.findById(expectedCategoryID)).
+        thenReturn(Optional.of(category));
 
     final var command =
         CreateSubcategoryCommand.with(expectedName, expectedCategoryID);
@@ -90,7 +101,7 @@ class CreateSubcategoryUseCaseTest extends UseCaseTest {
 
     final var expectedErrorMessage = "Category with ID 1 was not found";
 
-    Mockito.when(getCategoryByIdUseCase.execute(categoryID.getValue())).
+    Mockito.when(categoryGateway.findById(categoryID)).
         thenThrow(NotFoundException.with(Category.class, categoryID));
 
     final var command =

@@ -1,0 +1,12 @@
+mysql:
+  username: root
+  password: root
+  schema: controle_financeiro
+  url: localhost:3306
+
+server:
+  port: 8080
+  undertow:
+    threads:
+      worker: 10
+      io: 2

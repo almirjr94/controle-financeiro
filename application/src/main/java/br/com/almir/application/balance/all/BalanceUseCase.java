@@ -2,7 +2,7 @@ package br.com.almir.application.balance.all;
 
 import br.com.almir.application.UseCase;
 
-public abstract class GetBalanceUseCase extends
+public abstract class BalanceUseCase extends
     UseCase<BalanceCommand, BalanceOutput> {
 
 

@@ -16,8 +16,8 @@ public class FinancialReleaseID extends Identifier {
     this.value = value;
   }
 
-  public static FinancialReleaseID from(final Long anId) {
-    return new FinancialReleaseID(anId);
+  public static FinancialReleaseID from(final Long id) {
+    return new FinancialReleaseID(id);
   }
 
 

@@ -29,7 +29,7 @@ import org.mockito.Mockito;
 class GetBalanceByCategorieUseCaseTest extends UseCaseTest {
 
   @InjectMocks
-  private DefaultGetBalanceByCategorieUseCase useCase;
+  private DefaultBalanceByCategorieUseCase useCase;
 
   @Mock
   private CategoryGateway categoryGateway;
