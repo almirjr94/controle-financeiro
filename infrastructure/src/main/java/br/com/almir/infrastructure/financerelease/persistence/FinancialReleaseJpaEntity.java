@@ -7,7 +7,6 @@ import br.com.almir.infrastructure.subcategory.persistence.SubcategoryJpaEntity;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.time.LocalDate;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -47,7 +46,7 @@ public class FinancialReleaseJpaEntity {
   }
 
   public FinancialReleaseJpaEntity(Long id, SubcategoryJpaEntity subcategory, BigDecimal money,
-      String description, LocalDate releasedAt,Instant createdAt, Instant updatedAt) {
+      String description, LocalDate releasedAt, Instant createdAt, Instant updatedAt) {
     this.id = id;
     this.subcategory = subcategory;
     this.money = money;

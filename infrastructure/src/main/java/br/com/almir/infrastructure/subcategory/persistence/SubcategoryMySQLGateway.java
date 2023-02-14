@@ -93,7 +93,8 @@ public class SubcategoryMySQLGateway implements SubcategoryGateway {
       List<Predicate> predicates = new ArrayList<>();
 
       if (filter.name() != null && !filter.name().isBlank()) {
-        predicates.add(cb.like(cb.lower(root.get("name")), "%" + filter.name().toLowerCase() + "%"));
+        predicates.add(
+            cb.like(cb.lower(root.get("name")), "%" + filter.name().toLowerCase() + "%"));
       }
 
       if (filter.id() != null) {

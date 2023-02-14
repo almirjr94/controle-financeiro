@@ -5,7 +5,6 @@ import br.com.almir.domain.subcategory.Subcategory;
 import br.com.almir.domain.subcategory.SubcategoryID;
 import br.com.almir.infrastructure.category.persistence.CategoryJpaEntity;
 import java.time.Instant;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

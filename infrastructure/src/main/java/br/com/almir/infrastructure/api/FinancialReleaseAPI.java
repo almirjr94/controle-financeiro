@@ -6,6 +6,7 @@ import br.com.almir.infrastructure.financerelease.model.FinancialReleaseResponse
 import br.com.almir.infrastructure.financerelease.model.UpdateFinancialReleaseRequest;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -33,18 +34,22 @@ public interface FinancialReleaseAPI {
       produces = MediaType.APPLICATION_JSON_VALUE
   )
   @Operation(summary = "Create a new FinancialRelease")
+  @Parameter(in = ParameterIn.HEADER, name = "api-key")
   @ApiResponses(value = {
       @ApiResponse(responseCode = "201", description = "Created successfully"),
       @ApiResponse(responseCode = "400", description = "A validation error was thrown"),
+      @ApiResponse(responseCode = "401", description = "Unauthorized"),
       @ApiResponse(responseCode = "500", description = "An Internal server error was thrown"),
   })
   ResponseEntity<?> createFinancialRelease(@RequestBody CreateFinancialReleaseApiInput input);
 
   @GetMapping
   @Operation(summary = "List all FinancialRelease paginated")
+  @Parameter(in = ParameterIn.HEADER, name = "api-key")
   @ApiResponses(value = {
       @ApiResponse(responseCode = "200", description = "Listed successfully"),
       @ApiResponse(responseCode = "400", description = "A validation error was thrown"),
+      @ApiResponse(responseCode = "401", description = "Unauthorized"),
       @ApiResponse(responseCode = "500", description = "An Internal server error was thrown"),
   })
   Pagination<?> listFinancialReleases(
@@ -61,10 +66,12 @@ public interface FinancialReleaseAPI {
       value = "{id}",
       produces = MediaType.APPLICATION_JSON_VALUE
   )
+  @Parameter(in = ParameterIn.HEADER, name = "api-key")
   @Operation(summary = "Get a FinancialRelease by it's identifier")
   @ApiResponses(value = {
       @ApiResponse(responseCode = "200", description = "FinancialRelease retrieved successfully"),
       @ApiResponse(responseCode = "404", description = "FinancialRelease was not found"),
+      @ApiResponse(responseCode = "401", description = "Unauthorized"),
       @ApiResponse(responseCode = "500", description = "An internal server error was thrown"),
   })
   FinancialReleaseResponse getById(@PathVariable(name = "id") Long id);
@@ -74,10 +81,12 @@ public interface FinancialReleaseAPI {
       consumes = MediaType.APPLICATION_JSON_VALUE,
       produces = MediaType.APPLICATION_JSON_VALUE
   )
+  @Parameter(in = ParameterIn.HEADER, name = "api-key")
   @Operation(summary = "Update a FinancialRelease by it's identifier")
   @ApiResponses(value = {
       @ApiResponse(responseCode = "200", description = "FinancialRelease updated successfully"),
       @ApiResponse(responseCode = "404", description = "FinancialRelease was not found"),
+      @ApiResponse(responseCode = "401", description = "Unauthorized"),
       @ApiResponse(responseCode = "500", description = "An internal server error was thrown"),
   })
   ResponseEntity<?> updateById(@PathVariable(name = "id") Long id,
@@ -85,10 +94,12 @@ public interface FinancialReleaseAPI {
 
   @DeleteMapping(value = "{id}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
+  @Parameter(in = ParameterIn.HEADER, name = "api-key")
   @Operation(summary = "Delete a FinancialRelease by it's identifier")
   @ApiResponses(value = {
       @ApiResponse(responseCode = "204", description = "FinancialRelease deleted successfully"),
       @ApiResponse(responseCode = "404", description = "FinancialRelease was not found"),
+      @ApiResponse(responseCode = "401", description = "Unauthorized"),
       @ApiResponse(responseCode = "500", description = "An internal server error was thrown"),
   })
   void deleteById(@PathVariable(name = "id") Long id);

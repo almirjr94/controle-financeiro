@@ -25,7 +25,7 @@ public class FinancialReleaseUseCaseConfig {
   public FinancialReleaseUseCaseConfig(FinancialReleaseGateway financialReleaseGateway,
       SubcategoryGateway subcategoryGateway) {
     this.financialReleaseGateway = Objects.requireNonNull(financialReleaseGateway);
-    this.subcategoryGateway =  Objects.requireNonNull(subcategoryGateway);
+    this.subcategoryGateway = Objects.requireNonNull(subcategoryGateway);
   }
 
   @Bean

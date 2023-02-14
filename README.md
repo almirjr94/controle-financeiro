@@ -36,9 +36,22 @@ $ mvn test
 
 ## Acessar a aplicação
 
-- Após subir a aplicação, acessar os endpoints em [http://localhost:8080/api](http://localhost:8080/api)
+- Após subir a aplicação, acessar os endpoints
+  em [http://localhost:8080/api](http://localhost:8080/api)
 
-- O Swagger pode ser acessado em [http://localhost:8080/api/swagger-ui/index.html](http://localhost:8080/api/swagger-ui/index.html)
+- O Swagger pode ser acessado
+  em [http://localhost:8080/api/swagger-ui/index.html](http://localhost:8080/api/swagger-ui/index.html)
+- Necessario passa header api-key: aXRhw7o=
+
+
+Exemplo:
+
+```bash
+curl -X 'GET' \
+  'http://localhost:8080/api/v1/balance?initDate=2022-02-15&endDate=2022-02-19' \
+  -H 'accept: application/json' \
+  -H 'api-key: aXRhw7o='
+  ```
 
 ## Banco de dados
 
@@ -47,9 +60,11 @@ $ mvn test
 - user: root | password: root
 
 #### Para visualizar os dados
+
 ```bash    
 docker exec -it mysql_financeiro bash
 ```
+
 ```bash 
 mysql -u root -p
 ```

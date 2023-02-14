@@ -13,6 +13,7 @@ services:
       - DATABASE_MYSQL_USERNAME=root
       - DATABASE_MYSQL_PASSWORD=root
       - DATABASE_MYSQL_URL=mysql
+      - API_KEY=aXRhw7o=
     networks:
       - financial-network
     depends_on:

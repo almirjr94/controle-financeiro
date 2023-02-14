@@ -3,7 +3,6 @@ package br.com.almir.application.subcategory.retrieve.list;
 
 import br.com.almir.domain.pagination.Pagination;
 import br.com.almir.domain.pagination.SearchQuery;
-import br.com.almir.domain.subcategory.Subcategory;
 import br.com.almir.domain.subcategory.SubcategoryFilter;
 import br.com.almir.domain.subcategory.SubcategoryGateway;
 import java.util.Objects;

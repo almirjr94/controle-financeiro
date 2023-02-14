@@ -10,3 +10,6 @@ server:
     threads:
       worker: 10
       io: 2
+
+api:
+  key: ${API_KEY:aXRhw7o=}

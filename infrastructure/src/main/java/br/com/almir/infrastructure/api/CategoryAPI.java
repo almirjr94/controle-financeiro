@@ -5,6 +5,8 @@ import br.com.almir.infrastructure.category.model.CategoryResponse;
 import br.com.almir.infrastructure.category.model.CreateCategoryApiInput;
 import br.com.almir.infrastructure.category.model.UpdateCategoryRequest;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -31,6 +33,7 @@ public interface CategoryAPI {
       produces = MediaType.APPLICATION_JSON_VALUE
   )
   @Operation(summary = "Create a new category")
+  @Parameter(in = ParameterIn.HEADER, name = "api-key")
   @ApiResponses(value = {
       @ApiResponse(responseCode = "201", description = "Created successfully"),
       @ApiResponse(responseCode = "422", description = "A validation error was thrown"),
@@ -40,6 +43,7 @@ public interface CategoryAPI {
 
 
   @GetMapping
+  @Parameter(in = ParameterIn.HEADER, name = "api-key")
   @Operation(summary = "List all catergories paginated")
   @ApiResponses(value = {
       @ApiResponse(responseCode = "200", description = "Listed successfully"),
@@ -59,6 +63,7 @@ public interface CategoryAPI {
       produces = MediaType.APPLICATION_JSON_VALUE
   )
   @Operation(summary = "Get a category by it's identifier")
+  @Parameter(in = ParameterIn.HEADER, name = "api-key")
   @ApiResponses(value = {
       @ApiResponse(responseCode = "200", description = "Category retrieved successfully"),
       @ApiResponse(responseCode = "404", description = "Category was not found"),
@@ -73,16 +78,19 @@ public interface CategoryAPI {
       produces = MediaType.APPLICATION_JSON_VALUE
   )
   @Operation(summary = "Update a category by it's identifier")
+  @Parameter(in = ParameterIn.HEADER, name = "api-key")
   @ApiResponses(value = {
       @ApiResponse(responseCode = "200", description = "Category updated successfully"),
       @ApiResponse(responseCode = "404", description = "Category was not found"),
       @ApiResponse(responseCode = "500", description = "An internal server error was thrown"),
   })
-  ResponseEntity<?> updateById(@PathVariable(name = "id") Long id, @RequestBody UpdateCategoryRequest input);
+  ResponseEntity<?> updateById(@PathVariable(name = "id") Long id,
+      @RequestBody UpdateCategoryRequest input);
 
 
   @DeleteMapping(value = "{id}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
+  @Parameter(in = ParameterIn.HEADER, name = "api-key")
   @Operation(summary = "Delete a category by it's identifier")
   @ApiResponses(value = {
       @ApiResponse(responseCode = "204", description = "Category deleted successfully"),
