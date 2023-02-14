@@ -14,9 +14,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity(name = "Subcategory")
-@Table(name = "subcategory")
+@Table(name = "subcategory", uniqueConstraints = {
+    @UniqueConstraint(columnNames = {"category_id", "name"})})
 public class SubcategoryJpaEntity {
 
   @Id

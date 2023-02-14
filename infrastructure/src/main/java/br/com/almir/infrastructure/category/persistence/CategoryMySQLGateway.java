@@ -66,7 +66,8 @@ public class CategoryMySQLGateway implements CategoryGateway {
   }
 
   private Category save(Category category) {
-    return repository.save(CategoryJpaEntity.from(category)).toAggregate();
+    CategoryJpaEntity save = repository.save(CategoryJpaEntity.from(category));
+    return save.toAggregate();
   }
 
   private Specification<CategoryJpaEntity> specificaton(final CategoryFilter str) {

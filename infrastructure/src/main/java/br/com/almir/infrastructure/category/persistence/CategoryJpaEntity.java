@@ -18,7 +18,7 @@ public class CategoryJpaEntity {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Long id;
 
-  @Column(name = "name", nullable = false)
+  @Column(name = "name", nullable = false, unique = true)
   private String name;
 
   @Column(name = "created_at", nullable = false, columnDefinition = "DATETIME(6)")
@@ -39,7 +39,7 @@ public class CategoryJpaEntity {
 
   public static CategoryJpaEntity from(final Category category) {
     return new CategoryJpaEntity(
-        category.getId().getValue(),
+        category.getId() != null ? category.getId().getValue(): null,
         category.getName(),
         category.getCreatedAt(),
         category.getUpdatedAt()
