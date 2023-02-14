@@ -1,19 +1,19 @@
 package br.com.almir.application.financialrelease.update;
 
 import br.com.almir.domain.financialrelease.FinancialReleaseID;
+import java.math.BigDecimal;
 import java.time.LocalDate;
-import javax.money.MonetaryAmount;
 
 public record UpdateFinancialReleaseCommand(
     FinancialReleaseID id,
-    MonetaryAmount money,
+    BigDecimal money,
     String description,
     LocalDate releasedAt
 ) {
 
   public static UpdateFinancialReleaseCommand from(
       final FinancialReleaseID id,
-      final MonetaryAmount money,
+      final BigDecimal money,
       final String description,
       final LocalDate releasedAt
   ) {

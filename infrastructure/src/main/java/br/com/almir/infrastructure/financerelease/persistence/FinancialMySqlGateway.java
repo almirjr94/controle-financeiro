@@ -109,18 +109,24 @@ public class FinancialMySqlGateway implements FinancialReleaseGateway {
     return repository.save(FinancialReleaseJpaEntity.from(financialRelease)).toAggregate();
   }
 
-  private Specification<FinancialReleaseJpaEntity> specificaton(final FinancialReleaseFilter str) {
+  private Specification<FinancialReleaseJpaEntity> specificaton(
+      final FinancialReleaseFilter filter) {
+
     return (root, query, cb) -> {
       List<Predicate> predicates = new ArrayList<>();
 
-      if (str.releasedStart() != null && str.releasedEnd() != null) {
-        predicates.add(cb.between(root.get("released_at"), str.releasedStart().toString(),
-            str.releasedEnd().toString()));
+      if (filter.releasedStart() != null && filter.releasedEnd() != null) {
+        predicates.add(cb.between(root.get("releasedAt"), filter.releasedStart(),
+            filter.releasedEnd()));
       }
 
-      if (str.subcategoryID() != null) {
+      if (filter.subcategoryID() != null) {
         predicates.add(
-            cb.equal(root.get("subcategory_id"), str.subcategoryID().getValue().toString()));
+            cb.equal(root.get("subcategory"), filter.subcategoryID().getValue()));
+      }
+
+      if (predicates.isEmpty()) {
+        return null;
       }
 
       return cb.and(predicates.toArray(new Predicate[0]));

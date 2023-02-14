@@ -11,22 +11,26 @@ import br.com.almir.application.financialrelease.retrieve.list.ListFinancialRele
 import br.com.almir.application.financialrelease.update.DefaultUpdateFinancialReleaseUseCase;
 import br.com.almir.application.financialrelease.update.UpdateFinancialReleaseUseCase;
 import br.com.almir.domain.financialrelease.FinancialReleaseGateway;
+import br.com.almir.domain.subcategory.SubcategoryGateway;
 import java.util.Objects;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class FinancialReleaseUseCase {
+public class FinancialReleaseUseCaseConfig {
 
   private final FinancialReleaseGateway financialReleaseGateway;
+  private final SubcategoryGateway subcategoryGateway;
 
-  public FinancialReleaseUseCase(FinancialReleaseGateway financialReleaseGateway) {
+  public FinancialReleaseUseCaseConfig(FinancialReleaseGateway financialReleaseGateway,
+      SubcategoryGateway subcategoryGateway) {
     this.financialReleaseGateway = Objects.requireNonNull(financialReleaseGateway);
+    this.subcategoryGateway =  Objects.requireNonNull(subcategoryGateway);
   }
 
   @Bean
   public CreateFinancialReleaseUseCase createFinancialReleaseUseCase() {
-    return new DefaultCreateFinancialReleaseUseCase(financialReleaseGateway);
+    return new DefaultCreateFinancialReleaseUseCase(financialReleaseGateway, subcategoryGateway);
   }
 
   @Bean

@@ -5,6 +5,7 @@ import br.com.almir.domain.financialrelease.FinancialRelease;
 import br.com.almir.domain.financialrelease.FinancialReleaseGateway;
 import br.com.almir.domain.financialrelease.FinancialReleaseID;
 import java.util.Objects;
+import org.javamoney.moneta.FastMoney;
 
 public class DefaultUpdateFinancialReleaseUseCase extends UpdateFinancialReleaseUseCase {
 
@@ -17,11 +18,12 @@ public class DefaultUpdateFinancialReleaseUseCase extends UpdateFinancialRelease
   @Override
   public UpdateFinancialReleaseOutput execute(UpdateFinancialReleaseCommand in) {
     final var id = FinancialReleaseID.from(in.id().getValue());
+    final var brMoney = FastMoney.of(in.money(), "BRL");
 
     FinancialRelease financialRelease = this.financialReleaseGateway.findById(id)
         .orElseThrow(() -> NotFoundException.with(FinancialRelease.class, id));
 
-    financialRelease.update(in.money(), in.description(), in.releasedAt());
+    financialRelease.update(brMoney, in.description(), in.releasedAt());
 
     financialReleaseGateway.update(financialRelease);
 

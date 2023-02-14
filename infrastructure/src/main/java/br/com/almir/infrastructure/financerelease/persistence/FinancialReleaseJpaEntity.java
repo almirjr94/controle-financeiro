@@ -47,21 +47,23 @@ public class FinancialReleaseJpaEntity {
   }
 
   public FinancialReleaseJpaEntity(Long id, SubcategoryJpaEntity subcategory, BigDecimal money,
-      String description, Instant createdAt, Instant updatedAt) {
+      String description, LocalDate releasedAt,Instant createdAt, Instant updatedAt) {
     this.id = id;
     this.subcategory = subcategory;
     this.money = money;
     this.description = description;
+    this.releasedAt = releasedAt;
     this.createdAt = createdAt;
     this.updatedAt = updatedAt;
   }
 
   public static FinancialReleaseJpaEntity from(final FinancialRelease financialRelease) {
     return new FinancialReleaseJpaEntity(
-        financialRelease.getId().getValue(),
+        financialRelease.getId() != null ? financialRelease.getId().getValue() : null,
         SubcategoryJpaEntity.from(financialRelease.getSubcategoryID()),
         BigDecimal.valueOf(financialRelease.getMoney().getNumber().doubleValueExact()),
         financialRelease.getDescription(),
+        financialRelease.getReleasedAt(),
         financialRelease.getCreatedAt(),
         financialRelease.getUpdatedAt()
     );

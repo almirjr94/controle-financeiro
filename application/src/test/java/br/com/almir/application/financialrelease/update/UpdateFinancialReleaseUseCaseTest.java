@@ -49,7 +49,7 @@ class UpdateFinancialReleaseUseCaseTest extends UseCaseTest {
     final var financialRelease = FinancialRelease.newFinancialRelease(money,
         subcategoryID, description, releasedAt).with(id);
 
-    final var expectedMoney = FastMoney.of(BigDecimal.valueOf(4), Monetary.getCurrency("BRL"));
+    final var expectedMoney = BigDecimal.valueOf(4);
     final var expectedDescription = "La la la test";
     final var expectedReleased = LocalDate.of(2023, Month.JANUARY, 3);
 
@@ -62,7 +62,8 @@ class UpdateFinancialReleaseUseCaseTest extends UseCaseTest {
 
     Mockito.when(financialReleaseGateway.findById(id)).thenReturn(Optional.of(financialRelease));
     Mockito.when(financialReleaseGateway.update(any())).thenReturn(
-        FinancialRelease.newFinancialRelease(expectedMoney, subcategoryID, expectedDescription,
+        FinancialRelease.newFinancialRelease(FastMoney.of(expectedMoney, "BRL"), subcategoryID,
+            expectedDescription,
             expectedReleased));
 
     UpdateFinancialReleaseOutput actualOutput = useCase.execute(command);
@@ -92,7 +93,7 @@ class UpdateFinancialReleaseUseCaseTest extends UseCaseTest {
     final var financialRelease = FinancialRelease.newFinancialRelease(money,
         subcategoryID, description, releasedAt).with(id);
 
-    final var expectedMoney = FastMoney.of(BigDecimal.valueOf(0), Monetary.getCurrency("BRL"));
+    final var expectedMoney = BigDecimal.valueOf(0);
     final var expectedDescription = "La la la test";
     final var expectedReleased = LocalDate.of(2023, Month.JANUARY, 3);
 

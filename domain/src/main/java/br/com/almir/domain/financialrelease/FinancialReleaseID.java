@@ -2,6 +2,8 @@ package br.com.almir.domain.financialrelease;
 
 
 import br.com.almir.domain.Identifier;
+import br.com.almir.domain.exceptions.DomainException;
+import br.com.almir.domain.validation.Error;
 import java.util.Objects;
 
 public class FinancialReleaseID extends Identifier {
@@ -11,7 +13,7 @@ public class FinancialReleaseID extends Identifier {
   private FinancialReleaseID(final Long value) {
     Objects.requireNonNull(value);
     if (Long.signum(value) != 1) {
-      throw new IllegalArgumentException("FinancialRelease 'id' should be positive");
+      throw DomainException.with(new Error("FinancialRelease 'id' should be positive"));
     }
     this.value = value;
   }
