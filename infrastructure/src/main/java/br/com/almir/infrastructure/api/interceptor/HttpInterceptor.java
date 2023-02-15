@@ -17,12 +17,10 @@ public class HttpInterceptor implements HandlerInterceptor {
       throws Exception {
 
     String path = request.getRequestURI().substring(request.getContextPath().length());
-    if (path.startsWith("/swagger-ui/")) {
-      return true;
-    }
-    if (path.startsWith("/v3/api-docs")) {
-      return true;
-    }
+    if (path.startsWith("/swagger-ui/")) return true;
+    if (path.startsWith("/v3/api-docs")) return true;
+    if (path.startsWith("/actuator/")) return true;
+
 
     if (request.getHeader("api-key") != null &&
         request.getHeader("api-key").equals(apiKey)) {
