@@ -57,10 +57,10 @@ curl -X 'GET' \
 ## Monitoração
 
 - #### Prometheus e Grafana
-    - Grafana [http://localhost:3000/](http://localhost:3000/) 
+    - Grafana [http://localhost:3000/](http://localhost:3000/d/sOae4vCnk/spring-boot-statistics?orgId=1&refresh=5s) 
       - User: admin
       - Password: admin
-      - `Importar Dashboard` [Dashboard](data/grafana-spring-dashboard.json)
+      - `Caso não mostrar o Dashboard importar o json` [Dashboard.json](data/grafana-spring-dashboard.json)
     - Prometheus [http://localhost:9090/graph](http://localhost:9090/graph)
   
 
