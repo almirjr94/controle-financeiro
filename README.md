@@ -28,7 +28,7 @@ mvn test
 
 ## Executar Local
 ```bash
-docker-compose up mysql prometheus grafana
+docker-compose up mysql
 ```
 
 >Possível executar pela classe [Main.java](infrastructure/src/main/java/br/com/almir/infrastructure/Main.java) ou via maven
@@ -50,7 +50,7 @@ docker-compose up --build
 
 - O Swagger pode ser acessado
   em [http://localhost:8080/api/swagger-ui/index.html](http://localhost:8080/api/swagger-ui/index.html)
-- Necessario utlizar header para autenticação:
+- Necessário utilizar header para autenticação:
   - api-key: aXRhw7o=
 
 
