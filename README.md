@@ -1,6 +1,8 @@
 # API de Controle Financeiro
 
-RESTful API com Arquitetura Limpa.
+
+>Utilizando Clean Architecture e DDD 
+
 
 ## Tecnologias utilizadas
 
@@ -18,20 +20,27 @@ RESTful API com Arquitetura Limpa.
 
 - [Mockito](https://site.mockito.org/)
 
-## Setup
-
-- Instalar Docker e Docker Compose
-
-- Executar o comando
-
-```bash
-$ docker-compose up -d 
-```
-
 ## Executar os testes
 
 ```bash    
-$ mvn test
+mvn test
+```
+
+## Executar Local
+```bash
+docker-compose up mysql prometheus grafana
+```
+
+>Possível executar pela classe [Main.java](infrastructure/src/main/java/br/com/almir/infrastructure/Main.java) ou via maven
+
+```bash
+mvn -pl infrastructure spring-boot:run
+```
+
+## Executar via Docker
+
+```bash
+docker-compose up --build 
 ```
 
 ## Acessar a aplicação
