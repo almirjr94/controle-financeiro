@@ -41,7 +41,8 @@ $ mvn test
 
 - O Swagger pode ser acessado
   em [http://localhost:8080/api/swagger-ui/index.html](http://localhost:8080/api/swagger-ui/index.html)
-- Necessario passa header api-key: aXRhw7o=
+- Necessario utlizar header para autenticação:
+  - api-key: aXRhw7o=
 
 
 Exemplo:
@@ -53,11 +54,26 @@ curl -X 'GET' \
   -H 'api-key: aXRhw7o='
   ```
 
+## Monitoração
+
+- #### Prometheus e Grafana
+    - Grafana [http://localhost:3000/](http://localhost:3000/) 
+      - User: admin
+      - Password: admin
+      - `Importar Dashboard` [Dashboard](data/grafana-spring-dashboard.json)
+    - Prometheus [http://localhost:9090/graph](http://localhost:9090/graph)
+  
+
+
 ## Banco de dados
 
 - MySql
-- Database: controle_financeiro
-- user: root | password: root
+  - Database: 
+    - controle_financeiro
+  - User: 
+    - root 
+  - Password: 
+    - root
 
 #### Para visualizar os dados
 
