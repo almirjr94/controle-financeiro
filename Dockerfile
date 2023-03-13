@@ -1,9 +1,9 @@
-FROM maven:3.8.3-openjdk-17 as builder
+FROM openjdk:17-alpine as builder
 COPY . /app
 WORKDIR /app
-RUN mvn clean install -DskipTests
+RUN ./gradlew build
 
 FROM openjdk:17-alpine
 WORKDIR /app
-COPY --from=builder /app/infrastructure/target/infrastructure-1.0-SNAPSHOT.jar .
-ENTRYPOINT ["java", "-jar", "./infrastructure-1.0-SNAPSHOT.jar"]
+COPY --from=builder /app/build/libs/controle-financeiro.jar .
+ENTRYPOINT ["java", "-jar", "./controle-financeiro.jar"]
